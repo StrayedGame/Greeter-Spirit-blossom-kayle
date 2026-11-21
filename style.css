@@ -1,0 +1,200 @@
+/* ==========================================================================
+   VARIABLES DE COLOR Y CONFIGURACIÓN GLOBAL
+   ========================================================================== */
+:root {
+  --ink: #100d2b;    /* Fondo base oscuro */
+  --violet: #514080; /* Violeta intermedio */
+  --lilac: #b8a0e4;  /* Lila para etiquetas y texto secundario */
+  --mist: #f5eaff;   /* Blanco místico / texto principal */
+  --gold: #f1d491;   /* Dorado para acentos, bordes y brillo */
+  --rose: #e9a7c8;   /* Rosado espiritual */
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; margin: 0; overflow: hidden; }
+
+body {
+  color: var(--mist);
+  font-family: "Noto Sans", "DejaVu Sans", sans-serif;
+  background: var(--ink);
+  letter-spacing: .035em;
+}
+
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+/* ==========================================================================
+   CAPAS DE FONDO Y EFECTOS VISUALES (Cielo, Luna, Aurora, Pétalos)
+   ========================================================================== */
+.sky, .aurora, .moon, .petals { position: fixed; inset: 0; pointer-events: none; }
+
+.sky {
+  background:
+    radial-gradient(ellipse at 50% 105%, #a75c9e 0%, transparent 40%),
+    radial-gradient(ellipse at 85% 15%, #493875 0%, transparent 34%),
+    linear-gradient(145deg, #0c102e 0%, #292151 48%, #6d427e 100%);
+}
+
+.moon {
+  inset: auto auto 3vh 8vw;
+  width: min(45vw, 580px);
+  height: min(45vw, 580px);
+  border-radius: 50%;
+  opacity: .38;
+  background: radial-gradient(circle, rgba(255,249,218,.9) 0 3%, rgba(248,210,242,.37) 27%, rgba(170,126,220,.05) 64%, transparent 70%);
+  box-shadow: 0 0 120px 40px rgba(220,165,235,.2);
+}
+
+.aurora {
+  opacity: .4;
+  filter: blur(48px);
+  transform: rotate(-16deg);
+  animation: breathe 10s ease-in-out infinite alternate;
+}
+.aurora-one { background: linear-gradient(90deg, transparent 18%, #d889d0 46%, transparent 70%); }
+.aurora-two { background: linear-gradient(110deg, transparent 45%, #9c8de8 61%, transparent 78%); animation-delay: -5s; }
+
+.petals {
+  opacity: .7;
+  background-image:
+    radial-gradient(ellipse at 20% 35%, #ffd1ef 0 2px, transparent 3px),
+    radial-gradient(ellipse at 67% 21%, #f4b9da 0 2px, transparent 3px),
+    radial-gradient(ellipse at 88% 61%, #fff0fa 0 2px, transparent 3px),
+    radial-gradient(ellipse at 37% 76%, #dba7ec 0 1px, transparent 2px);
+  background-size: 280px 310px, 330px 270px, 250px 360px, 190px 220px;
+  animation: drift 18s linear infinite;
+}
+
+/* ==========================================================================
+   BARRAS SUPERIOR E INFERIOR
+   ========================================================================== */
+.topbar, .bottom-bar {
+  position: fixed; left: 0; right: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  z-index: 2; padding: 30px 4.5vw;
+}
+.topbar { top: 0; }
+.bottom-bar { bottom: 0; }
+
+.brand { color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: .26em; text-shadow: 0 0 15px rgba(241,212,145,.4); }
+.brand-mark { font-size: 19px; padding-right: 8px; }
+.clock { color: rgba(245,234,255,.85); font-size: 14px; }
+
+/* ==========================================================================
+   TARJETA PRINCIPAL DE LOGIN (LOGIN CARD)
+   ========================================================================== */
+.stage { position: relative; z-index: 1; height: 100%; display: grid; place-items: center; }
+
+.login-card {
+  width: min(390px, calc(100vw - 48px));
+  padding: 42px 43px 37px;
+  text-align: center;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(140deg, rgba(35,25,75,.78), rgba(29,20,60,.57));
+  border: 1px solid rgba(242,212,145,.46);
+  border-radius: 3px;
+  box-shadow: 0 22px 70px rgba(3,2,20,.45), inset 0 0 45px rgba(207,164,230,.08);
+  backdrop-filter: blur(15px);
+}
+
+/* Imagen de fondo dentro de la tarjeta de inicio de sesión */
+.login-card::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  opacity: .7;
+  background: url("kayle_splash_centered_78-874414509.jpg") center / cover no-repeat;
+}
+
+.login-card::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(22,12,56,.42), rgba(38,14,62,.28));
+}
+
+/* Símbolo en rombo superior */
+.sigil {
+  display: grid; place-items: center; margin: 0 auto 15px;
+  width: 48px; height: 48px; transform: rotate(45deg);
+  border: 1px solid rgba(241,212,145,.8); color: var(--gold);
+  box-shadow: 0 0 20px rgba(241,212,145,.3);
+}
+.sigil span { transform: rotate(-45deg); font-size: 22px; }
+
+.eyebrow { margin: 21px 0 8px; color: var(--rose); font-size: 9px; font-weight: 700; letter-spacing: .19em; }
+h1 { margin: 0 0 23px; font-family: Georgia, serif; font-size: 31px; font-weight: 400; letter-spacing: .04em; }
+
+/* ==========================================================================
+   LISTA DE USUARIOS Y AVATARES
+   ========================================================================== */
+.users { display: flex; justify-content: center; gap: 13px; min-height: 57px; margin-bottom: 10px; }
+.user {
+  width: 54px; height: 54px; overflow: hidden; padding: 0;
+  color: var(--mist); background: rgba(255,255,255,.11);
+  border: 1px solid transparent; border-radius: 50%;
+  transition: .2s ease;
+}
+.user img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.user.active { border-color: var(--gold); box-shadow: 0 0 14px rgba(241,212,145,.65); transform: translateY(-2px); }
+.selected-user { min-height: 22px; margin: 0 0 19px; color: rgba(245,234,255,.9); font-size: 16px; font-weight: 600; }
+
+/* ==========================================================================
+   FORMULARIO Y CAMPOS DE ENTRADA
+   ========================================================================== */
+#login-form { text-align: left; }
+#prompt-label { display: block; margin-bottom: 7px; color: var(--lilac); font-size: 10px; letter-spacing: .13em; text-transform: uppercase; }
+.input-wrap { position: relative; }
+#entry {
+  position: relative; z-index: 1; width: 100%; padding: 13px 14px;
+  color: white; outline: none; background: rgba(9,7,30,.48);
+  border: 1px solid rgba(190,160,228,.36); border-radius: 2px;
+}
+#entry:focus { border-color: var(--gold); }
+.input-glow { position: absolute; inset: 0; opacity: 0; box-shadow: 0 0 18px rgba(233,167,200,.5); transition: opacity .2s; }
+#entry:focus ~ .input-glow { opacity: 1; }
+
+#login-button {
+  width: 100%; margin-top: 18px; padding: 12px;
+  color: #38294e; background: linear-gradient(100deg, #e9c682, #f7e4b1, #dfa7c1);
+  border: 0; border-radius: 2px; font-size: 11px; font-weight: 800;
+  letter-spacing: .16em; text-transform: uppercase; transition: filter .2s, transform .2s;
+}
+#login-button:hover { filter: brightness(1.12); transform: translateY(-1px); }
+#login-button:disabled { cursor: wait; filter: grayscale(.25); opacity: .65; transform: none; }
+#login-button span { font-size: 16px; padding-left: 8px; }
+
+.message { min-height: 17px; margin: 15px 0 0; color: #ffb8c4; font-size: 12px; }
+.message.info { color: var(--lilac); }
+
+/* ==========================================================================
+   BOTONES Y ACCIONES DE ENERGÍA (APAGAR, REINICIAR, SUSPENDER)
+   ========================================================================== */
+.utility, .icon-button {
+  color: rgba(245,234,255,.8); background: transparent; border: 0;
+  font-size: 11px; letter-spacing: .1em; transition: color .2s;
+}
+.utility:hover, .icon-button:hover { color: var(--gold); }
+#session-name { color: var(--gold); margin-left: 5px; }
+.power-actions { display: flex; gap: 18px; }
+.icon-button { padding: 4px; font-size: 18px; }
+
+/* ==========================================================================
+   ANIMACIONES
+   ========================================================================== */
+@keyframes breathe { to { transform: rotate(-11deg) scale(1.13); opacity: .57; } }
+@keyframes drift { to { transform: translate3d(-35px, 55px, 0); } }
+
+/* Adaptación para pantallas de baja altura */
+@media (max-height: 650px) {
+  .login-card { padding: 25px 38px; }
+  .sigil { width: 36px; height: 36px; margin-bottom: 5px; }
+  .eyebrow { margin-top: 10px; }
+  h1 { margin-bottom: 12px; }
+  .topbar, .bottom-bar { padding-top: 16px; padding-bottom: 16px; }
+}

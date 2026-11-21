@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spirit Blossom - Kayle Greeter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Capas de fondo animadas (Cielo, Luna, Auroras y Pétalos) -->
+  <div class="sky"></div>
+  <div class="moon"></div>
+  <div class="aurora aurora-one"></div>
+  <div class="aurora aurora-two"></div>
+  <div class="petals" aria-hidden="true"></div>
+
+  <!-- Barra Superior: Marca / Título del Tema y Reloj -->
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">✦</span> SPIRIT BLOSSOM</div>
+    <div id="clock" class="clock"></div>
+  </header>
+
+  <!-- Contenedor Principal: Tarjeta de Inicio de Sesión -->
+  <main class="stage">
+    <section class="login-card" aria-label="Inicio de sesión">
+      <!-- Símbolo decorativo -->
+      <div class="sigil"><span>✦</span></div>
+      
+      <!-- Subtítulo y Título de Bienvenida (Editar aquí el mensaje principal) -->
+      <p class="eyebrow">EL REINO ESPIRITUAL TE ESPERA</p>
+      <h1>Bienvenido</h1>
+
+      <!-- Contenedor dinámico de avatares de usuario (generado por theme.js) -->
+      <div id="users" class="users"></div>
+      <p id="selected-user" class="selected-user"></p>
+
+      <!-- Formulario de Autenticación -->
+      <form id="login-form">
+        <label id="prompt-label" for="entry">Contraseña</label>
+        <div class="input-wrap">
+          <input id="entry" type="password" autocomplete="off" autofocus>
+          <span class="input-glow"></span>
+        </div>
+        <button id="login-button" type="submit">Entrar <span>→</span></button>
+      </form>
+
+      <!-- Mensajes de estado (error/información) -->
+      <p id="message" class="message" role="status"></p>
+    </section>
+  </main>
+
+  <!-- Barra Inferior: Selección de Sesión (Desktop Manager) y Botones de Apagado/Reiniciar -->
+  <footer class="bottom-bar">
+    <button id="session-button" class="utility" type="button">Sesión <span id="session-name"></span></button>
+    <div class="power-actions">
+      <button id="suspend-button" class="icon-button" type="button" title="Suspender">☾</button>
+      <button id="restart-button" class="icon-button" type="button" title="Reiniciar">↻</button>
+      <button id="shutdown-button" class="icon-button" type="button" title="Apagar">⏻</button>
+    </div>
+  </footer>
+
+  <script src="theme.js"></script>
+</body>
+</html>

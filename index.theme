@@ -1,0 +1,5 @@
+[theme]
+name=Kayle Spirit Blossom
+description=An ethereal violet and gold LightDM theme inspired by Spirit Blossom Kayle
+engine=lightdm-webkit2-greeter
+url=index.html

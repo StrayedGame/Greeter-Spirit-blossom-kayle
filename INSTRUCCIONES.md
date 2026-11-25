@@ -1,6 +1,8 @@
-# Kayle Spirit Blossom — Tema para LightDM WebKit2
+# Kayle Spirit Blossom — Instrucciones de personalización
 
-Tema de inicio de sesión (*greeter*) para **LightDM** usando **lightdm-webkit2-greeter**, inspirado en la temática *Spirit Blossom* (Flor Espiritual) de Kayle (*League of Legends*).
+Tema de inicio de sesión (*greeter*) para **LightDM** usando **Web Greeter**, inspirado en la temática *Spirit Blossom* (Flor Espiritual) de Kayle (*League of Legends*).
+
+> Para requisitos e instalación, consulta [`README.md`](README.md). Este documento explica cómo editar el tema.
 
 ---
 
@@ -8,13 +10,15 @@ Tema de inicio de sesión (*greeter*) para **LightDM** usando **lightdm-webkit2-
 
 ```
 kayle-spirit-blossom-greeter/
-├── index.html                           # Estructura principal de la interfaz HTML
-├── style.css                            # Estilos, colores, fondo, tipografía y animaciones
-├── theme.js                             # Lógica de interacción con la API de LightDM (login, usuarios, reloj, energía)
-├── index.theme                          # Archivo de metadatos del tema para LightDM WebKit
-├── install.sh                           # Script de instalación automática para Linux
-├── kayle_splash_centered_78-874414509.jpg # Imagen de fondo de la tarjeta principal
-└── README.md                            # Guía de documentación y edición
+├── index.html                              # Estructura principal de la interfaz HTML
+├── style.css                               # Estilos, colores, fondo, tipografía y animaciones
+├── theme.js                                # Lógica de interacción con la API de LightDM (login, usuarios, reloj, energía)
+├── index.theme                             # Metadatos de compatibilidad del tema
+├── index.toml                              # Punto de entrada para Web Greeter
+├── install.sh                              # Script de instalación automática para Linux
+├── kayle_splash_centered_78-874414509.jpg  # Imagen de fondo de la tarjeta principal
+├── README.md                               # Requisitos e instalación
+└── INSTRUCCIONES.md                        # Esta guía de edición y personalización
 ```
 
 ---
@@ -60,25 +64,29 @@ Las fuentes se definen en las reglas:
 - **Pétalos cayendo:** Controlados por la animación `@keyframes drift` y la clase `.petals`.
 - **Efecto de respiración de la aurora:** Controlado por `@keyframes breathe` y las clases `.aurora-one` y `.aurora-two`.
 
+### 6. Interfaz y Comportamiento (`index.html` y `theme.js`)
+- **Lista de usuarios:** se genera dinámicamente desde `lightdm.users` dentro de `#users`.
+- **Selector de sesión:** el botón `#session-button` recorre las sesiones disponibles en `lightdm.sessions`.
+- **Acciones de energía:** los botones `#suspend-button`, `#restart-button` y `#shutdown-button` llaman a `lightdm.suspend()`, `lightdm.restart()` y `lightdm.shutdown()`.
+- **Reloj:** se actualiza desde `theme.js` en el elemento `#clock`.
+- **Mensajes de LightDM:** `show_prompt`, `show_message` y `authentication_complete` se conectan en `theme.js` para mostrar avisos y gestionar el login.
+
 ---
 
 ## 🖥️ Cómo Probar los Cambios en Tu Navegador
 
-Puedes abrir `index.html` en tu navegador (Chrome, Firefox, etc.) para ajustar colores, tipografía y estilos CSS en tiempo real. 
+Puedes abrir `index.html` en tu navegador (Chrome, Firefox, etc.) para ajustar colores, tipografía y estilos CSS en tiempo real.
 
 *Nota:* Al abrirlo localmente en un navegador web, las funciones de inicio de sesión y lista de usuarios no mostrarán usuarios reales porque requieren la API de `window.lightdm` que provee el servicio de LightDM en Linux.
 
 ---
 
-## 🚀 Instalación y Aplicación
+## 🚀 Aplicar los Cambios
 
-Para instalar o actualizar el tema en tu sistema Linux con `lightdm-webkit2-greeter`:
+Después de editar los archivos, vuelve a ejecutar el instalador para copiar la versión actualizada al sistema:
 
 ```bash
 sudo ./install.sh
 ```
 
-El script se encargará de:
-1. Copiar los archivos a `/usr/share/lightdm-webkit/themes/kayle-spirit-blossom`.
-2. Crear copias de seguridad de las configuraciones existentes en `/etc/lightdm/`.
-3. Establecer `kayle-spirit-blossom` como el tema activo.
+Luego reinicia LightDM o el equipo. Consulta [`README.md`](README.md) para los requisitos y el proceso de instalación completo.
